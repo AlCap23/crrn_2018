@@ -56,16 +56,18 @@ class simulationServer(object):
         """Reset the bullet physic client.
         """
 
-        if self.thread_running:
+        if self.simulation_running:
             self.stopSimulation()
 
-        while self.thread_running:
+        while self.simulation_running:
             sleep(1e-3)
 
         self._initialize_()
 
         if loadState:
             self.loadStatus(state_id, filename)
+        else:
+            pybullet.rese
 
     def _initialize_(self):
 
@@ -197,8 +199,9 @@ class simulationServer(object):
                     pybullet.stepSimulation()
                 # Collect all measurements
                 current_measurements = {}
-                for robot in self.robots.values():
-                    current_measurements.update(robot.getMeasurements())
+                if hasattr(self, "robots"):
+                    for robot in self.robots.values():
+                        current_measurements.update(robot.getMeasurements())
                 # Add the new time
                 self.time += self.step_size
                 current_measurements.update({"time": self.time})

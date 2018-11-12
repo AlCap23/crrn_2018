@@ -141,8 +141,8 @@ class SimulationObject(object):
         """Change the parameter of a link.
         """
         # Take only valid links
-        if link in self.links.keys():
-            link_id = self.links[link]["id"]
+        if link in self._links.keys():
+            link_id = self._links[link]
         else:
             return
 
