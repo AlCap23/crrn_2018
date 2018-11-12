@@ -1,0 +1,577 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 0.7 -->
+  <robot name="Stewart">
+
+    <link name="ITF_12">
+    </link>
+
+    <link name="ITF_22">
+    </link>
+
+    <link name="ITF_23">
+    </link>
+
+    <link name="ITF_31">
+    </link>
+
+    <link name="ITF_33">
+    </link>
+
+    <link name="P_11">
+      <inertial>
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.03413" ixy="-0.03313" ixz="0" iyy="0.03413" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_11">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <visual name="Visual_Top">
+        <origin xyz="0.22334 -0.43301 0.44629" rpy="0.24482 0.39748 0.57314"/>
+        <geometry>
+          <cylinder radius="0.5" length="0.1"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_11">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+      <collision name="Visual_Top">
+        <origin xyz="0.22334 -0.43301 0.44629" rpy="0.24482 0.39748 0.57314"/>
+        <geometry>
+          <cylinder radius="0.5" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="P_22">
+      <inertial>
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.00866" ixy="-0.05861" ixz="0" iyy="0.00866" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_11.005">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_11.005">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="P_33">
+      <inertial>
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.03413" ixy="-0.03313" ixz="0" iyy="0.03413" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_11.003">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_11.003">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="P_44">
+      <inertial>
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.03413" ixy="-0.03313" ixz="0" iyy="0.03413" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_11.002">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_11.002">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="P_55">
+      <inertial>
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.00866" ixy="-0.05861" ixz="0" iyy="0.00866" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_11.001">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_11.001">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="P_66">
+      <inertial>
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.03413" ixy="-0.03313" ixz="0" iyy="0.03413" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_11.004">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_11.004">
+        <origin xyz="0 0 0.28" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="R_11">
+    </link>
+
+    <link name="R_12">
+    </link>
+
+    <link name="R_13">
+      <inertial>
+        <origin xyz="-0.28 0 0" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.01742" ixy="0" ixz="0" iyy="0.01409" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_10">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_10">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="R_21">
+    </link>
+
+    <link name="R_22">
+    </link>
+
+    <link name="R_23">
+      <inertial>
+        <origin xyz="-0.28 0 0" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.01742" ixy="0" ixz="0" iyy="0.01409" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_10.005">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_10.005">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="R_31">
+    </link>
+
+    <link name="R_32">
+    </link>
+
+    <link name="R_33">
+      <inertial>
+        <origin xyz="-0.28 0 0" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.01742" ixy="0" ixz="0" iyy="0.01409" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_10.003">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_10.003">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="R_41">
+    </link>
+
+    <link name="R_42">
+    </link>
+
+    <link name="R_43">
+      <inertial>
+        <origin xyz="-0.28 0 0" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.01742" ixy="0" ixz="0" iyy="0.01409" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_10.002">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_10.002">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="R_51">
+    </link>
+
+    <link name="R_52">
+    </link>
+
+    <link name="R_53">
+      <inertial>
+        <origin xyz="-0.28 0 0" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.01742" ixy="0" ixz="0" iyy="0.01409" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_10.001">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_10.001">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="R_61">
+    </link>
+
+    <link name="R_62">
+    </link>
+
+    <link name="R_63">
+      <inertial>
+        <origin xyz="-0.28 0 0" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.01742" ixy="0" ixz="0" iyy="0.01409" iyz="0" izz="0.002"/>
+      </inertial>
+      <visual name="Visual_10.004">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <cylinder radius="0.015" length="0.56"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_10.004">
+        <origin xyz="-0.28 0 0" rpy="0 -1.5708 0"/>
+        <geometry>
+          <box size="0.03 0.03 0.56"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="root">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="2.0"/>
+        <inertia ixx="0.12667" ixy="0" ixz="0" iyy="0.12667" iyz="0" izz="0.25"/>
+      </inertial>
+      <visual name="Visual_Base.001">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.5" length="0.1"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_Base.001">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.5" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="top_11">
+    </link>
+
+    <link name="top_12">
+    </link>
+
+    <link name="top_13">
+    </link>
+
+    <joint name="ITF_12" type="floating">
+      <origin xyz="-0.0003 0 0.55803" rpy="-0.24482 -0.39748 -2.56845"/>
+      <parent link="P_22"/>
+      <child link="ITF_12"/>
+    </joint>
+
+    <joint name="ITF_22" type="floating">
+      <origin xyz="-0.00029 0.00088 0.55803" rpy="0.46338 0.00078 1.56924"/>
+      <parent link="P_33"/>
+      <child link="ITF_22"/>
+    </joint>
+
+    <joint name="ITF_23" type="floating">
+      <origin xyz="-0.00029 0 0.55803" rpy="-0.24482 0.39748 -0.57314"/>
+      <parent link="P_44"/>
+      <child link="ITF_23"/>
+    </joint>
+
+    <joint name="ITF_31" type="floating">
+      <origin xyz="-0.00029 0.00087 0.55803" rpy="0.46338 0.00078 1.56924"/>
+      <parent link="P_66"/>
+      <child link="ITF_31"/>
+    </joint>
+
+    <joint name="ITF_33" type="floating">
+      <origin xyz="-0.00029 0 0.55803" rpy="-0.24482 -0.39748 -2.56845"/>
+      <parent link="P_55"/>
+      <child link="ITF_33"/>
+    </joint>
+
+    <joint name="P_11" type="prismatic">
+      <origin xyz="-0.56 0 0" rpy="0 -1.5708 0"/>
+      <parent link="R_13"/>
+      <child link="P_11"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="P_22" type="prismatic">
+      <origin xyz="-0.56 0 0" rpy="0 -1.5708 0"/>
+      <parent link="R_23"/>
+      <child link="P_22"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="P_33" type="prismatic">
+      <origin xyz="-0.56 0 0" rpy="0 -1.5708 0"/>
+      <parent link="R_33"/>
+      <child link="P_33"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="P_44" type="prismatic">
+      <origin xyz="-0.56 0 0" rpy="0 -1.5708 0"/>
+      <parent link="R_43"/>
+      <child link="P_44"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="P_55" type="prismatic">
+      <origin xyz="-0.56 0 0" rpy="0 -1.5708 0"/>
+      <parent link="R_53"/>
+      <child link="P_55"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="P_66" type="prismatic">
+      <origin xyz="-0.56 0 0" rpy="0 -1.5708 0"/>
+      <parent link="R_63"/>
+      <child link="P_66"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="R_11" type="revolute">
+      <origin xyz="0 0.5 0" rpy="0 -0.46338 0.5236"/>
+      <parent link="root"/>
+      <child link="R_11"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_12" type="revolute">
+      <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+      <parent link="R_11"/>
+      <child link="R_12"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_13" type="revolute">
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <parent link="R_12"/>
+      <child link="R_13"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_21" type="revolute">
+      <origin xyz="0 0.5 0" rpy="0 -0.46338 2.61799"/>
+      <parent link="root"/>
+      <child link="R_21"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_22" type="revolute">
+      <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+      <parent link="R_21"/>
+      <child link="R_22"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_23" type="revolute">
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <parent link="R_22"/>
+      <child link="R_23"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_31" type="revolute">
+      <origin xyz="0.43301 -0.25 0" rpy="0 -0.46338 -1.56905"/>
+      <parent link="root"/>
+      <child link="R_31"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_32" type="revolute">
+      <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+      <parent link="R_31"/>
+      <child link="R_32"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_33" type="revolute">
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <parent link="R_32"/>
+      <child link="R_33"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_41" type="revolute">
+      <origin xyz="0.43301 -0.25 0" rpy="0 -0.46338 0.5236"/>
+      <parent link="root"/>
+      <child link="R_41"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_42" type="revolute">
+      <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+      <parent link="R_41"/>
+      <child link="R_42"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_43" type="revolute">
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <parent link="R_42"/>
+      <child link="R_43"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_51" type="revolute">
+      <origin xyz="-0.43301 -0.25 0" rpy="0 -0.46338 2.61799"/>
+      <parent link="root"/>
+      <child link="R_51"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_52" type="revolute">
+      <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+      <parent link="R_51"/>
+      <child link="R_52"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_53" type="revolute">
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <parent link="R_52"/>
+      <child link="R_53"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_61" type="revolute">
+      <origin xyz="-0.43301 -0.25 0" rpy="0 -0.46338 -1.56905"/>
+      <parent link="root"/>
+      <child link="R_61"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_62" type="revolute">
+      <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+      <parent link="R_61"/>
+      <child link="R_62"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="R_63" type="revolute">
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <parent link="R_62"/>
+      <child link="R_63"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="0" velocity="1000.0"/>
+    </joint>
+
+    <joint name="top_11" type="floating">
+      <origin xyz="-0.00029 0 0.55803" rpy="0.24482 0.39748 0.57314"/>
+      <parent link="P_11"/>
+      <child link="top_11"/>
+    </joint>
+
+    <joint name="top_12" type="floating">
+      <origin xyz="0.43301 -0.75 0" rpy="0 0 0"/>
+      <parent link="top_11"/>
+      <child link="top_12"/>
+    </joint>
+
+    <joint name="top_13" type="floating">
+      <origin xyz="-0.43301 -0.75 0" rpy="0 0 0"/>
+      <parent link="top_11"/>
+      <child link="top_13"/>
+    </joint>
+
+  </robot>
