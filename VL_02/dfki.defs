@@ -1,0 +1,83 @@
+% AUTHOR: Tobias Quintern <quintern@informatik.uni-bremen.de>
+
+\documentclass{beamer}
+\usepackage{eurosym}
+\usepackage{textcomp}
+
+\usepackage{pgf,pgfarrows,pgfnodes}
+\usepackage{pgfbaseimage}
+\usepackage{ifthen}
+
+\setbeamercovered{transparent}
+
+\definecolor{pcg1}{cmyk}{0,0,0.07,0.06}
+\pgfdeclareimage[width=35mm]{uni-bremen-logo}{pics/logo350}
+\pgfdeclareimage[width=45mm]{robert-hooke-building}{pics/robert_hooke_building}
+
+
+
+\setbeamertemplate{headline}
+{%
+  \begin{beamercolorbox}{section in head/foot}
+    \vspace{0.2cm}
+    
+    \hfill \hspace{1cm} {\huge \insertsection} %
+    \hfill \includegraphics[height=0.8cm] {pics/DFKI_logo.png} \hspace{.2cm}
+    \vspace{0.1cm}
+    
+    \includegraphics[width=\paperwidth] {pics/top_bar.png}
+    
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}
+{%
+  \begin{beamercolorbox}{section in head/foot}
+    
+    \begin{pgfpicture}{0cm}{0cm}{0cm}{0cm}
+       
+      { \color{pcg1} \pgfrect[fill]{\pgfxy(0,0)}{\pgfxy(10,1)} }
+      { \color{pcg1} \pgfrect[fill]{\pgfxy(10,0)}{\pgfxy(14,0.6)}}
+            
+      \pgfputat{\pgfxy(0.5,0.15)}{\pgfbox[left,base]{\pgfuseimage{uni-bremen-logo}}}
+      
+      \ifthenelse{\insertframenumber > 1}{
+        \pgfputat{\pgfxy(5,0.5)}{\pgfbox[left,base]{\insertshorttitle}}
+        \pgfputat{\pgfxy(5,0.25)}{\pgfbox[left,base]{\today}}
+      
+        {\large \pgfputat{\pgfxy(12,0.25)}{\pgfbox[right,base]{\insertframenumber /\inserttotalframenumber}}}
+      }{}
+    \end{pgfpicture}
+
+    \end{beamercolorbox}%
+}
+
+\setbeamercolor{title}{fg=black}
+
+\setbeamertemplate{title page}
+{%
+  \begin{beamercolorbox}{}
+        \vspace{1cm}
+    
+        {\large \inserttitle }
+    
+        \vspace{0.2cm}
+    
+        {\large \insertauthor }
+            
+    \begin{pgfpicture}{0pt}{0pt}{\paperwidth}{7cm}
+     
+        {\footnotesize \pgfputat{\pgfpoint{-0.2cm}{6cm}}{\pgfbox[left,base]{DFKI Bremen \& Universit\"at Bremen}}}
+        {\footnotesize \pgfputat{\pgfpoint{-0.2cm}{5.5cm}}{\pgfbox[left,base]{Robotics Innovation Center}} }
+        {\footnotesize \pgfputat{\pgfpoint{-0.2cm}{5cm}}{\pgfbox[left,base]{Director: Prof. Dr. Frank Kirchner}} }
+        {\footnotesize \pgfputat{\pgfpoint{-0.2cm}{4.5cm}}{\pgfbox[left,base]{www.dfki.de/robotics}} }
+        {\footnotesize \pgfputat{\pgfpoint{-0.2cm}{4cm}}{\pgfbox[left,base]{robotics@dfki.de}} }
+
+        \pgfputat{\pgfpoint{6.3cm}{3.5cm}}{\pgfbox[left,base]{\pgfuseimage{robert-hooke-building}}}
+    \end{pgfpicture}
+    
+  \end{beamercolorbox}
+
+  
+}
+
