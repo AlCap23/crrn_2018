@@ -206,3 +206,38 @@ class Robot(_SimObject):
                         self._measurements.update(
                             {link + "_angular_velocity_z": vel_ang_glo[2]}
                         )
+
+
+class StewartPlatform(Robot):
+    def __init__(self, server, **kwargs):
+        super().__init__(server, urdf="../../models/urdf/Stewart.urdf", **kwargs)
+
+        # Add the constraints
+        parents = ["top_11", "top_12", "top_13"]
+        children = {
+            "top_11": ["ITF_31"],
+            "top_12": ["ITF_22", "ITF_12"],
+            "top_13": ["ITF_23", "ITF_33"],
+        }
+
+        self.constraints = {}
+
+        for parent in parents:
+            parent_id = self.joints[parent]["jointIndex"]
+            for child in children[parent]:
+                constraint_name = parent + "_2_" + child
+                child_id = self.joints[child]["jointIndex"]
+                # Create a p2p connection
+                constraint_id = pybullet.createConstraint(
+                    parentBodyUniqueId=self.id,
+                    parentLinkIndex=parent_id,
+                    childBodyUniqueId=self.id,
+                    childLinkIndex=child_id,
+                    jointType=pybullet.JOINT_POINT2POINT,
+                    jointAxis=(0, 0, 0),
+                    parentFramePosition=(0, 0, 0),
+                    childFramePosition=(0, 0, 0),
+                )
+                # Store the constraint information
+                self.constraints.update({constraint_name: constraint_id})
+
