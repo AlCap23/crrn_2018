@@ -202,6 +202,9 @@ class simulationServer(object):
                 if hasattr(self, "robots"):
                     for robot in self.robots.values():
                         current_measurements.update(robot.getMeasurements())
+                        robot._updateSliderValues()
+                    for simObject in self.objects.values():
+                        simObject._updateSliderValues()
                 # Add the new time
                 self.time += self.step_size
                 current_measurements.update({"time": self.time})

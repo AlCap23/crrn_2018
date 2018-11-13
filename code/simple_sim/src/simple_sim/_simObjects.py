@@ -1,71 +1,47 @@
-from simple_sim._simObjects import _SimObject
-
 import pybullet
+import pybullet_data
 
 
-class SimObject(_SimObject):
-    """Base class for a simulation object.
+class _SimObject(object):
+    """Base class for simulation objects which do not need to be controlled.
+
+    Args:
+     server, object : Simulation server
+     file, path : Path to the urdf file
+     kwargs : Additional parameter as specified by pybullet.loadURDF
+    
+    Returns:
+     None
     """
 
     def __init__(self, server, urdf=None, **kwargs):
-        super().__init__(server, urdf, **kwargs)
-
-        # Add the robot to the server
-        server.addObject(self)
-
-
-class SimHeightmap(object):
-    def __init__(self, server, mesh, **kwargs):
         # Client of the simulation
         self.client_id = server.client_id
-        self.mesh_file = mesh
+        self.urdf_file = urdf
 
-        self._createHeightmap(**kwargs)
+        self._loadUrdf(**kwargs)
         self._initGeneralParameter()
 
-        server.addObject(self)
+    def _loadUrdf(self, *args, **kwargs):
+        """Load the associated urdf file.
+        """
 
-    def _createHeightmap(self, **kwargs):
+        allowedKeys = [
+            "basePosition",
+            "baseOrientation",
+            "useMaximalCoordinates",
+            "useFixedBase",
+            "flags",
+            "globalScaling",
+        ]
 
-        loadKeys = {
-            "shapeType": pybullet.GEOM_MESH,
-            "fileName": self.mesh_file,
-            "flags": pybullet.GEOM_FORCE_CONCAVE_TRIMESH
-            | pybullet.GEOM_CONCAVE_INTERNAL_EDGE,
-        }
+        loadKeys = {"fileName": self.urdf_file, "physicsClientId": self.client_id}
 
-        if "scale" in kwargs:
-            loadKeys.update({"meshScale": kwargs["scale"]})
+        for additionalKey in kwargs.keys():
+            if additionalKey in allowedKeys:
+                loadKeys.update({additionalKey: kwargs[additionalKey]})
 
-        # Create the terrain via the obj data
-        terrain_collision_shape = pybullet.createCollisionShape(**loadKeys)
-
-        # Create the heightmap
-        loadKeys = {
-            "baseMass": 0,
-            "baseCollisionShapeIndex": terrain_collision_shape,
-            "baseVisualShapeIndex": -1,
-            "basePosition": [0, 0, 0],
-            "baseOrientation": [0, 0, 0, 1],
-        }
-
-        if "basePosition" in kwargs:
-            loadKeys.update({"basePosition": kwargs["basePosition"]})
-        if "baseOrientation" in kwargs:
-            loadKeys.update(
-                {
-                    "baseOrientation": pybullet.getQuaternionFromEuler(
-                        kwargs["baseOrientation"]
-                    )
-                }
-            )
-
-        self.id = pybullet.createMultiBody(**loadKeys)
-
-        if "texture" in kwargs:
-            self.texture_id = pybullet.loadTexture(kwargs["texture"])
-            print(self.texture_id)
-            pybullet.changeVisualShape(self.id, -1, -1, self.texture_id)
+        self.id = pybullet.loadURDF(**loadKeys)
 
     def _initGeneralParameter(self):
         """ Initializes the general parameter, e.g. joint_dict, link_dict.
@@ -164,7 +140,7 @@ class SimHeightmap(object):
         self.joints.update({param_dict["jointName"].decode("utf-8"): param_dict})
         self._links.update({param_dict["linkName"].decode("utf-8"): joint_id})
 
-    def changeDynamicParameter(self, link, **kwargs):
+    def changeDynamicParameter(self, link, add_slider=False, **kwargs):
         """Change the parameter of a link.
         """
         # Take only valid links
@@ -173,13 +149,13 @@ class SimHeightmap(object):
         else:
             return
 
-        allowedKeys = [
-            "mass",
-            "restitution",
-            "contactStiffness",
-            "contactDamping",
-            "localInertiaDiagonal",
-        ]
+        allowedKeys = {
+            "mass": [0, 1e1],
+            "restitution": [0, 0.99],
+            "contactStiffness": [0, 0.3],
+            "contactDamping": [0, 0.3],
+            "localInertiaDiagonal": [],
+        }
 
         loadKeys = {
             "bodyUniqueId": self.id,
@@ -190,6 +166,25 @@ class SimHeightmap(object):
         for additionalKey in kwargs.keys():
             if additionalKey in allowedKeys:
                 loadKeys.update({additionalKey: kwargs[additionalKey]})
+
+                if add_slider and additionalKey is not "localInertiaDiagonal":
+                    if not hasattr(self, "_sliders"):
+                        self._sliders = {}
+
+                    param_name = link + "_" + additionalKey
+                    param_val = kwargs[additionalKey]
+
+                    self._sliders.update(
+                        {
+                            param_name: pybullet.addUserDebugParameter(
+                                paramName=param_name,
+                                rangeMin=allowedKeys[additionalKey][0],
+                                rangeMax=allowedKeys[additionalKey][1],
+                                startValue=param_val,
+                                physicsClientId=self.client_id,
+                            )
+                        }
+                    )
 
         pybullet.changeDynamics(**loadKeys)
         self._storeLinkParameter(link_id)
@@ -206,3 +201,4 @@ class SimHeightmap(object):
             self.changeDynamicParameter(
                 **{"link": name, "add_slider": False, param: value}
             )
+
