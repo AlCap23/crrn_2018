@@ -16,11 +16,15 @@ class _SimObject(object):
 
     def __init__(self, server, urdf=None, **kwargs):
         # Client of the simulation
+        self.server = server
         self.client_id = server.client_id
         self.urdf_file = urdf
 
         self._loadUrdf(**kwargs)
         self._initGeneralParameter()
+
+    def update(self):
+        pass
 
     def _loadUrdf(self, *args, **kwargs):
         """Load the associated urdf file.
@@ -198,7 +202,8 @@ class _SimObject(object):
             name, param = slider.split("_")
             # Get the value
             value = pybullet.readUserDebugParameter(slider_id, self.client_id)
-            self.changeDynamicParameter(
-                **{"link": name, "add_slider": False, param: value}
-            )
+            if name in self._links:
+                self.changeDynamicParameter(
+                    **{"link": name, "add_slider": False, param: value}
+                )
 

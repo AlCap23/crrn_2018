@@ -25,6 +25,9 @@ class SimHeightmap(object):
 
         server.addObject(self)
 
+    def update(self):
+        self._updateSliderValues()
+
     def _createHeightmap(self, **kwargs):
 
         loadKeys = {

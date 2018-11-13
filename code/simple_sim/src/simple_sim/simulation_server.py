@@ -85,6 +85,7 @@ class simulationServer(object):
 
         # Store the simulation data
         self.measurements = pandas.DataFrame()
+        self._measurements = pandas.DataFrame()
 
     def saveStatus(self, save_state=False, on_disk=False, filename=None):
         """Save the current status of the simulation. 
@@ -197,20 +198,25 @@ class simulationServer(object):
                 # Step the simulation
                 with self.lock:
                     pybullet.stepSimulation()
-                # Collect all measurements
-                current_measurements = {}
-                if hasattr(self, "robots"):
-                    for robot in self.robots.values():
-                        current_measurements.update(robot.getMeasurements())
-                        robot._updateSliderValues()
-                    for simObject in self.objects.values():
-                        simObject._updateSliderValues()
+
                 # Add the new time
                 self.time += self.step_size
-                current_measurements.update({"time": self.time})
-                self.measurements = self.measurements.append(
-                    current_measurements, ignore_index=True
+                self._measurements = self._measurements.append(
+                    {"time": self.time}, ignore_index=True
                 )
+                # Collect all measurements
+                if hasattr(self, "robots"):
+                    for robot in self.robots.values():
+                        robot.update()
+                if hasattr(self, "objects"):
+                    for simObject in self.objects.values():
+                        simObject.update()
+
+                self.measurements = self.measurements.append(
+                    self._measurements, ignore_index=True
+                )
+                self._measurements = pandas.DataFrame()
+
                 # Check for gui -> slow down sim
                 if self.mode:
                     sleep(self.sleep_time)

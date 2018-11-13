@@ -13,12 +13,29 @@ class Robot(_SimObject):
         # Add the robot to the server
         server.addRobot(self)
 
-    def getMeasurements(self):
-        # Get all measured variables
-        self._collectJointMeasurements()
-        self._collectLinkMeasurements()
+    def update(self):
 
-        return self._measurements
+        self._updateSliderValues()
+
+        if hasattr(self, "controller"):
+            for controller in self.controller.values():
+                controller.update()
+
+        if hasattr(self, "measurements"):
+            self._collectJointMeasurements()
+            self._collectLinkMeasurements()
+
+        if hasattr(self, "_measurements"):
+            self.server._measurements = self.server._measurements.append(
+                self._measurements, ignore_index=True
+            )
+
+    def addController(self, controller):
+        if not hasattr(self, "controller"):
+            self.controller = {}
+
+        uid = len(self.controller)
+        self.controller.update({uid: controller})
 
     def addJointMeasurement(self, joint, variables=None):
         """ Measure a specific joint with specific variables ( Position, Velocity, Force) in generalized coordinates.
