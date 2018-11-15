@@ -1,0 +1,259 @@
+\hypertarget{tutorial-1---basic-multibody-simulation}{%
+\section{Tutorial 1 - Basic Multibody
+Simulation}\label{tutorial-1---basic-multibody-simulation}}
+
+\hypertarget{abstract}{%
+\subsection{Abstract}\label{abstract}}
+
+In this practical lecture you should gather (first) experience with a
+multibody simulation. For an easy start, we use
+\href{https://github.com/bulletphysics/bullet3}{Bullet Physics} with its
+natural binding \href{https://pybullet.org/wordpress/}{PyBullet}.
+Recently, PyBullet has been used in different scientific applications,
+e.g. \href{https://youtu.be/t-gSFn24ZKs}{deep-learning for mimic
+movement}, \href{https://youtu.be/xf_UXK0OTIk}{simulation-reality gap
+learning} and others.
+
+The Bullet Physics Library is still under development and incorporates
+many usefull features like inverse kinematics, control, ray tracing.
+
+In this tutorial you should: - Get to know some basic simulation
+parameters - See the influence of geometry on the simulation - Create a
+simple multibody via scripting
+
+\hypertarget{a-word-of-advice}{%
+\subsection{A word of Advice}\label{a-word-of-advice}}
+
+\begin{itemize}
+\item
+  If you feel stuck, feel free to ask. However, the goal is that you
+  play with the simulation and get a feeling for the influence of
+  different parameters.
+\item
+  Pybullet has a decent API documentation, the
+  \href{https://docs.google.com/document/d/10sXEhzFRSnvFcl3XxNGhnD4N2SedqwdAvK3dsihxVUA/edit\#heading=h.2ye70wns7io3}{Pybullet
+  Quickstart Guide}, where almost every command is explained.
+\item
+  Futhermore, the
+  \href{https://github.com/bulletphysics/bullet3/tree/master/examples/pybullet/examples}{Examples
+  Folder} within the Github Repository is full of \ldots{}examples.
+\end{itemize}
+
+We will use \href{https://github.com/jupyterlab/jupyterlab}{Jupyter Lab}
+for this tutorial, which enables an interactive use of python - and
+other languages. You can start via:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Use these commands in a terminal}
+
+\CommentTok{# Activate the simulation environment of conda}
+\BuiltInTok{source}\NormalTok{ activate crrn_sim}
+
+\CommentTok{# Navigate to an appropriate folder of your choice}
+\BuiltInTok{cd}\NormalTok{ my/simulation/folder}
+
+\CommentTok{# Start a jupyter lab server}
+\ExtensionTok{jupyter}\NormalTok{ lab}
+\end{Highlighting}
+\end{Shaded}
+
+A browser opens up, where you will find a user interface. Select
+\texttt{File\ -\textgreater{}\ New\ -\textgreater{}\ Notebook} and
+Python 3 as a kernel. Rename your notebook accordingly.
+
+\hypertarget{part-1---simple-physics---simple-models}{%
+\subsection{Part 1 - Simple Physics - Simple
+models}\label{part-1---simple-physics---simple-models}}
+
+We will start by investigating the classical examples which lead to the
+model of gravity as given by Isaac Newton : A falling object. Oppose to
+using an apple, a sphere will suffice for our investigation.
+
+You need the following commands:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pybullet}
+\ImportTok{import}\NormalTok{ pybullet_data}
+
+\CommentTok{# Start a server with a graphical user interface}
+\NormalTok{pybullet.}\ExtensionTok{connect}\NormalTok{(}\OperatorTok{*}\NormalTok{args)}
+
+\CommentTok{# Get some objects to import}
+\NormalTok{pybullet_data.getDataPath()}
+
+\CommentTok{# Load a urdf}
+\NormalTok{pybullet.loadURDF( filename, }\OperatorTok{*}\NormalTok{args)}
+
+\CommentTok{# Set the gravity}
+\NormalTok{pybullet.setGravity(}\OperatorTok{*}\NormalTok{args)}
+
+\CommentTok{# And some way to step the simulation}
+\NormalTok{pybullet.setRealTimeSimulation(}\OperatorTok{*}\NormalTok{args)}
+\NormalTok{pybullet.stepSimulation(}\OperatorTok{*}\NormalTok{args)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tasklist}{%
+\subsubsection{Tasklist}\label{tasklist}}
+
+\begin{itemize}
+\tightlist
+\item
+  Start a simulation server
+\item
+  Get the data path of pybullet\_data
+\item
+  Add the objects `plane.urdf' and `sphere2.urdf' and load them into the
+  simulation
+\item
+  Set the gravity accordingly
+\item
+  Simulate for a sufficient time period, e.g.~10 seconds
+\end{itemize}
+
+What do you see?
+
+\hypertarget{hints}{%
+\subsubsection{Hints}\label{hints}}
+
+\begin{itemize}
+\tightlist
+\item
+  Ideally, the sphere has to be placed above the plane.
+\item
+  Look up all commands in the
+  \href{https://docs.google.com/document/d/10sXEhzFRSnvFcl3XxNGhnD4N2SedqwdAvK3dsihxVUA/edit\#heading=h.2ye70wns7io3}{Pybullet
+  Quickstart Guide} to get the necessary \texttt{*args}
+\end{itemize}
+
+\hypertarget{notes}{%
+\subsubsection{Notes}\label{notes}}
+
+\pagebreak
+
+\hypertarget{part-2---simple-physics---extended}{%
+\subsection{Part 2 - Simple Physics -
+Extended}\label{part-2---simple-physics---extended}}
+
+Next, we want to enhance the simulation. We clearly need to change some
+settings to get a real behaviour.
+
+First, remember that the momentum of two colliding objects is (ideally)
+conserved
+
+\(p_1(t_0)+p_2(t_0)=p_1(t_1)+p_2(t_1)\)
+
+However, due to thermodynamics, we can assume that the overall energy of
+the mechanical system is constant or decreasing.
+
+\(E(t_0) = \sum_i \frac{1}{2 m_i} p_i^2(t_0)\geq E(t_1)\)
+
+Which is modeled via the restitution of a collision
+
+\(p_i(t_1) = m_i v_i (t_1) = e ~ m_i v_i(t_0)\)
+
+We can manipulate these parameters in Pybullet as well. Try the
+following commands:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Get available information on a body}
+\NormalTok{pybullet.getDynamicsInfo(}\OperatorTok{*}\NormalTok{args)}
+
+\CommentTok{# Change that information}
+\NormalTok{pybullet.changeDynamics(}\OperatorTok{*}\NormalTok{args)}
+
+\CommentTok{# Can you make a debug parameter to change the dynamics on the fly}
+\NormalTok{pybullet.addUserDebugParameter(}\OperatorTok{*}\NormalTok{args)}
+\NormalTok{pybullet.readUserDebugParameter(}\OperatorTok{*}\NormalTok{args)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{hints-1}{%
+\subsubsection{Hints}\label{hints-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  If you use a simulation loop, you can apply the
+  \texttt{pybullet.readUserDebugParameter} and
+  \texttt{pybullet.changeDynamics(*args)} each loop
+\item
+  You can use this tactic with the real time simulation as well.
+\end{itemize}
+
+\hypertarget{notes-1}{%
+\subsubsection{Notes}\label{notes-1}}
+
+\pagebreak
+
+\hypertarget{part-3---simple-physics---hyperparameter}{%
+\subsection{Part 3 - Simple Physics -
+Hyperparameter}\label{part-3---simple-physics---hyperparameter}}
+
+Still, some influences remain which we have not touched yet. To explore
+the hyperparameter of the simulation, we can use the following commands:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Get the available parameter of the engine}
+\NormalTok{pybullet.getPhysicsEngineParameter(}\OperatorTok{*}\NormalTok{args)}
+
+\CommentTok{# Set them}
+\NormalTok{pybullet.setPhysicsEngineParameter(}\OperatorTok{*}\NormalTok{args)}
+\end{Highlighting}
+\end{Shaded}
+
+Where parameter like step size can be varied. Add user debug parameter
+for \texttt{fixedTimeStep}, \texttt{numSubSteps}, \texttt{erp},
+\texttt{contactERP} and \texttt{frictionERP} and see whats happening.
+
+\hypertarget{notes-2}{%
+\subsubsection{Notes}\label{notes-2}}
+
+\pagebreak
+
+\hypertarget{part-4---simple-physics---create-a-body}{%
+\subsection{Part 4 - Simple Physics - Create a
+Body}\label{part-4---simple-physics---create-a-body}}
+
+Next, we will create another sphere with the API.
+
+Copy the following code snippet into a jupyter cell and execute:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{pybullet.resetSimulation()}
+
+\NormalTok{pybullet.loadURDF(pybullet_data.getDataPath() }\OperatorTok{+} \StringTok{'/plane.urdf'}\NormalTok{, useFixedBase }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
+
+\NormalTok{collision }\OperatorTok{=}\NormalTok{ pybullet.createCollisionShape(}
+\NormalTok{    shapeType }\OperatorTok{=}\NormalTok{ pybullet.GEOM_BOX,}
+\NormalTok{    halfExtents }\OperatorTok{=}\NormalTok{ [}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{]}
+\NormalTok{)}
+
+\NormalTok{visual }\OperatorTok{=}\NormalTok{ pybullet.createVisualShape(}
+\NormalTok{    shapeType }\OperatorTok{=}\NormalTok{ pybullet.GEOM_SPHERE,}
+\NormalTok{    radius }\OperatorTok{=} \FloatTok{0.5}
+\NormalTok{)}
+
+\NormalTok{new_sphere }\OperatorTok{=}\NormalTok{ pybullet.createMultiBody(}
+\NormalTok{    baseMass }\OperatorTok{=} \FloatTok{1.0}\NormalTok{,}
+\NormalTok{    baseCollisionShapeIndex }\OperatorTok{=}\NormalTok{ collision,}
+\NormalTok{    baseVisualShapeIndex }\OperatorTok{=}\NormalTok{ visual,}
+\NormalTok{    basePosition }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{0.5}\NormalTok{]}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+A new sphere is created at position \(r = (1,1,1)\).
+
+Create another sphere \texttt{new\_sphere\_2} at location
+\(r=(1.25, 0.75, 1.8)\) and look what happens. Remember to set the
+gravity and start the simulation.
+
+\hypertarget{notes-3}{%
+\subsubsection{Notes}\label{notes-3}}
