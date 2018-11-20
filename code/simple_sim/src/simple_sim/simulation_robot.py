@@ -210,7 +210,7 @@ class Robot(_SimObject):
 
 class StewartPlatform(Robot):
     def __init__(self, server, **kwargs):
-        super().__init__(server, urdf="../../models/urdf/Stewart.urdf", **kwargs)
+        super().__init__(server, **kwargs)
 
         # Add the constraints
         parents = ["top_11", "top_12", "top_13"]

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 0.7 -->
+  <robot name="Simple_Pendulum">
+
+    <link name="Base_Root">
+    </link>
+
+    <link name="q_1">
+      <inertial>
+        <origin xyz="0 0.5 -2e-08" rpy="0 0 0"/>
+        <mass value="1.0"/>
+        <inertia ixx="0.08583" ixy="0" ixz="0" iyy="0.08583" iyz="0" izz="0.005"/>
+      </inertial>
+      <visual name="Visual_Shape">
+        <origin xyz="0 0.5 -2e-08" rpy="-1.57079637 0 0"/>
+        <geometry>
+          <cylinder radius="0.1" length="1.0"/>
+        </geometry>
+      </visual>
+      <collision name="Visual_Shape">
+        <origin xyz="0 0.5 -2e-08" rpy="-1.57079637 0 0"/>
+        <geometry>
+          <cylinder radius="0.1" length="1.0"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="q_1" type="revolute">
+      <origin xyz="0 0 0" rpy="1.57079637 0 0"/>
+      <parent link="Base_Root"/>
+      <child link="q_1"/>
+      <axis xyz="0 0 1.0"/>
+      <limit lower="-1.5" upper="1.5" effort="0.0" velocity="3.1400001"/>
+    </joint>
+
+  </robot>

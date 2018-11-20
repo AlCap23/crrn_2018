@@ -369,7 +369,7 @@
       <parent link="R_13"/>
       <child link="P_11"/>
       <axis xyz="0 0 1.0"/>
-      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="1000.0" velocity="100.0"/>
     </joint>
 
     <joint name="P_22" type="prismatic">
@@ -377,7 +377,7 @@
       <parent link="R_23"/>
       <child link="P_22"/>
       <axis xyz="0 0 1.0"/>
-      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="1000.0" velocity="100.0"/>
     </joint>
 
     <joint name="P_33" type="prismatic">
@@ -385,7 +385,7 @@
       <parent link="R_33"/>
       <child link="P_33"/>
       <axis xyz="0 0 1.0"/>
-      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="1000.0" velocity="100.0"/>
     </joint>
 
     <joint name="P_44" type="prismatic">
@@ -393,7 +393,7 @@
       <parent link="R_43"/>
       <child link="P_44"/>
       <axis xyz="0 0 1.0"/>
-      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="1000.0" velocity="100.0"/>
     </joint>
 
     <joint name="P_55" type="prismatic">
@@ -401,7 +401,7 @@
       <parent link="R_53"/>
       <child link="P_55"/>
       <axis xyz="0 0 1.0"/>
-      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="1000.0" velocity="100.0"/>
     </joint>
 
     <joint name="P_66" type="prismatic">
@@ -409,7 +409,7 @@
       <parent link="R_63"/>
       <child link="P_66"/>
       <axis xyz="0 0 1.0"/>
-      <limit lower="-0.2" upper="0.2" effort="100.0" velocity="1.0"/>
+      <limit lower="-0.2" upper="0.2" effort="1000.0" velocity="100.0"/>
     </joint>
 
     <joint name="R_11" type="revolute">
