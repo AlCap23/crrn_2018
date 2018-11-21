@@ -28,7 +28,33 @@ while t < 10:
     sleep(0.2)
     t += 0.2
 ```
+# Define a control group
 
+```python
+# Simple loop over all joints, not ordered
+controller_dict = {}
+for joint in sorted(robot.joints.keys()):
+    controller_dict.update(
+        {joint : Controls.PositionControl(robot, joint, False)}
+    )
+
+controller_Group1 = {}
+controller_Group2 = {}
+
+# Get the right joints
+controller_keyList = ['Joint_1', 'Joint_2','Joint_3', 'Joint_4']
+for controller in controller_keyList:
+    controller_Group1.update(
+        {controller : controller_dict[controller]}
+    )
+
+# Another one
+controller_keyList = ['Joint_13', 'Joint_14','Joint_15', 'Joint_16']
+for controller in controller_keyList:
+    controller_Group2.update(
+        {controller : controller_dict[controller]}
+    )
+```
 # Add a control law
 
 ```python
