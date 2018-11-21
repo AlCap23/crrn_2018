@@ -30,10 +30,13 @@ class simulationServer(object):
         None
     """
 
-    def __init__(self, mode="GUI"):
+    def __init__(self, mode="GUI", shader = 'OPENGL3'):
         # Init of the physics client:
         if mode == "GUI":
-            self.client_id = pybullet.connect(pybullet.GUI)
+            if shader == 'OPENGL3':
+                self.client_id = pybullet.connect(pybullet.GUI)
+            else:
+                self.client_id = pybullet.connect(pybullet.GUI, options = "--opengl2")
             self.mode = True
         else:
             self.mode = False
