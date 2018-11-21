@@ -201,6 +201,7 @@ class simulationServer(object):
 
                 # Add the new time
                 self.time += self.step_size
+                # TODO Have a look a thread safety
                 self._measurements = self._measurements.append(
                     {"time": self.time}, ignore_index=True
                 )

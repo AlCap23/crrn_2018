@@ -62,7 +62,7 @@
       </collision>
     </link>
 
-    <link name="Link_0">
+    <link name="BaseLink">
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="1.0"/>
@@ -460,7 +460,7 @@
     <link name="Link_9">
     </link>
 
-    <joint name="Gripper1" type="prismatic">
+    <joint name="Gripper_RightGrip" type="prismatic">
       <origin xyz="0.53 0 0.05" rpy="0 0 0"/>
       <parent link="GripperBase"/>
       <child link="Gripper1"/>
@@ -468,7 +468,7 @@
       <limit lower="0" upper="0.4" effort="500.0" velocity="20.0"/>
     </joint>
 
-    <joint name="Gripper2" type="prismatic">
+    <joint name="Gripper_LeftGrip" type="prismatic">
       <origin xyz="0.53 0 -0.05" rpy="3.14159 0 0"/>
       <parent link="GripperBase"/>
       <child link="Gripper2"/>
@@ -476,9 +476,9 @@
       <limit lower="0" upper="0.4" effort="500.0" velocity="20.0"/>
     </joint>
 
-    <joint name="GripperBase" type="revolute">
+    <joint name="Gripper_Revolute" type="revolute">
       <origin xyz="0.6 0 0" rpy="1.5708 0 0"/>
-      <parent link="Link_0"/>
+      <parent link="BaseLink"/>
       <child link="GripperBase"/>
       <axis xyz="0 0 1.0"/>
       <limit lower="-3.0" upper="3.0" effort="500.0" velocity="20.0"/>
@@ -486,7 +486,7 @@
 
     <joint name="Joint_1" type="revolute">
       <origin xyz="-0.5 -0.5 -0.09" rpy="0 0 0"/>
-      <parent link="Link_0"/>
+      <parent link="BaseLink"/>
       <child link="Link_1"/>
       <axis xyz="0 0 1.0"/>
       <limit lower="-3.0" upper="3.0" effort="500.0" velocity="20.0"/>
@@ -518,7 +518,7 @@
 
     <joint name="Joint_13" type="revolute">
       <origin xyz="-0.5 0.5 -0.09" rpy="0 0 -3.14159"/>
-      <parent link="Link_0"/>
+      <parent link="BaseLink"/>
       <child link="Link_13"/>
       <axis xyz="0 0 1.0"/>
       <limit lower="-3.0" upper="3.0" effort="500.0" velocity="20.0"/>
@@ -550,7 +550,7 @@
 
     <joint name="Joint_17" type="revolute">
       <origin xyz="0 0.5 -0.09" rpy="0 0 -3.14159"/>
-      <parent link="Link_0"/>
+      <parent link="BaseLink"/>
       <child link="Link_17"/>
       <axis xyz="0 0 1.0"/>
       <limit lower="-3.0" upper="3.0" effort="500.0" velocity="20.0"/>
@@ -590,7 +590,7 @@
 
     <joint name="Joint_21" type="revolute">
       <origin xyz="0.5 0.5 -0.09" rpy="0 0 -3.14159"/>
-      <parent link="Link_0"/>
+      <parent link="BaseLink"/>
       <child link="Link_21"/>
       <axis xyz="0 0 1.0"/>
       <limit lower="-3.0" upper="3.0" effort="500.0" velocity="20.0"/>
@@ -638,7 +638,7 @@
 
     <joint name="Joint_5" type="revolute">
       <origin xyz="0.07 -0.5 -0.09" rpy="0 0 0"/>
-      <parent link="Link_0"/>
+      <parent link="BaseLink"/>
       <child link="Link_5"/>
       <axis xyz="0 0 1.0"/>
       <limit lower="-3.0" upper="3.0" effort="500.0" velocity="20.0"/>
@@ -670,7 +670,7 @@
 
     <joint name="Joint_9" type="revolute">
       <origin xyz="0.5 -0.5 -0.09" rpy="0 0 0"/>
-      <parent link="Link_0"/>
+      <parent link="BaseLink"/>
       <child link="Link_9"/>
       <axis xyz="0 0 1.0"/>
       <limit lower="-3.0" upper="3.0" effort="500.0" velocity="20.0"/>
