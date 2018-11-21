@@ -28,3 +28,20 @@ while t < 10:
     sleep(0.2)
     t += 0.2
 ```
+
+# Add a control law
+
+```python
+# Define a control function for a given control Group (dict)
+def controlJoints(time, shift, amplitude ,controlGroup):
+    # We know the structure of the control group
+    counter = 0
+    for joint, controller in controlGroup.items():
+        if counter == 0:
+            reference = amplitude*0.3*np.pi*np.sin(time+shift)
+        elif counter == 1:
+            reference = amplitude*0.2*np.pi*np.sin(time+shift)
+        else:
+            reference = 0
+        controller.setReference(reference)
+``
